@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jade;
+import java.util.Random;
+import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
+/**
+ *
+ * @author PC
+ */
+public class Agente3 extends Agent {
+    
+  protected void setup() {
+    System.out.println("Agent "+getLocalName()+" started.");
+    addBehaviour(new MyOneShotBehaviour());
+  } 
+
+  private class MyOneShotBehaviour extends OneShotBehaviour {
+    int cont=0,currentX;
+    int Adversiting=60,Year=1,Sales,num1=1,Sales2;
+    public void action() {
+        Random MiAleatorio = new Random();
+        int Adversiting2=MiAleatorio.nextInt(100);
+        Sales=168+(23*Adversiting2);
+        System.out.println("VENTA:"+num1+" sales:"+Sales+" Adversiting:"+Adversiting2);
+        if(Adversiting>Adversiting2){
+            Adversiting=Adversiting2;
+            System.out.println("VENTA:"+num1+" sales:"+Sales+" Mejor solucion:"+Adversiting);
+        }
+        Year+=1;
+        num1+=1;
+        cont+=1;
+    } 
+    
+public int onEnd() {
+      myAgent.doDelete();
+      return super.onEnd();
+    }   
+  }
+}
