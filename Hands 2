@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jade;
+
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+
+/**
+ *
+ * @author PC
+ */
+public class Jade extends Agent {
+    
+    protected void setup() {
+    System.out.println("Agent "+getLocalName()+" started.");
+    addBehaviour(new MyGenericBehaviour());
+  } 
+
+  private class MyGenericBehaviour extends Behaviour {
+
+    int cont=0;
+    float Adversiting=60,Year=1,Sales,num1=1,Sales2;
+
+    public void action() {
+        Sales=168+(23*Adversiting);
+        Sales2=323+14*Adversiting+47*Year;
+        System.out.println("VENTA:"+num1+" sales:"+Sales+" Adversiting:"+Adversiting);
+        System.out.println("VENTA:"+num1+" sales:"+Sales2+" Adversiting:"+Adversiting);
+        Adversiting+=10;
+        Year+=1;
+        num1+=1;
+        cont+=1;
+    } 
+    
+    
+    public boolean done() {
+      if (cont == 3)
+        return true;
+      else
+	return false;
+    }
+   
+    public int onEnd() {
+      myAgent.doDelete();
+      return super.onEnd();
+    } 
+  }    // END of inner class ...Behavio
+    
+}
