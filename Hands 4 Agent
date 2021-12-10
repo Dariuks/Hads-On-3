@@ -1,0 +1,55 @@
+
+    /*
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
+     */
+///
+    package jade;
+    import jade.core.Agent;
+    import jade.core.behaviours.Behaviour;
+
+    public class Agente4 extends Agent{
+       protected void setup() {
+        System.out.println("Agent "+getLocalName()+" started.");
+        addBehaviour(new MyGenericBehaviour());
+      } 
+
+      private class MyGenericBehaviour extends Behaviour {
+        float alpha=(float)0.001,grad,Beta0=0,Beta1=0;
+        int i = 0;
+        float gg=1000000,gg0 = 0;
+        int iteracion=0;
+        public void action() {
+            ///x=(int)(Math.random()*90+1);
+
+                grad=2*(Beta0-5);
+                Beta0=Beta0-(alpha*grad);
+                Beta1=(float)((Math.pow(Beta0-5,2))*Beta0);
+                System.out.printf("Beta0 = %.3f, Beta1 = %.3f\n", Beta0, Beta1);
+                if(Beta1<gg){
+                    gg=Beta1;
+                    gg0=Beta0;
+                    iteracion=i;
+                }
+
+            if (Beta1 <= 0.0001){
+            System.out.printf("Iteracion = "+iteracion+" Beta0 optima = %.3f, Beta1 optima = %.3f\n", gg0, gg);}
+            i+=1;
+
+        } 
+
+        public boolean done() {
+          if (Beta1 <=0.5)
+            return true;
+          else
+            return false;
+        }
+
+        public int onEnd() {
+          myAgent.doDelete();
+          return super.onEnd();
+        }
+      }
+    }
+//
