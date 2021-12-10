@@ -1,0 +1,170 @@
+///
+    /*
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
+     */
+    package jade;
+    import jade.core.Agent;
+    import jade.core.behaviours.Behaviour;
+
+
+    public class Agente5 extends Agent{
+       protected void setup() {
+        System.out.println("Agent "+getLocalName()+" started.");
+        addBehaviour(new MyGenericBehaviour());
+      } 
+
+      private class MyGenericBehaviour extends Behaviour {
+
+            float alpha=(float)0.001,grad,Beta0=0,Beta1=0;
+            float gg=1000000,gg0 = 0;
+            int iteracion=0,x,y,i=0,ran,ran1=0,ran2=0,bin,solouna=0;///X es el padre y Y es la madre, una vez se utiliza X pasa a ser Y
+            int[] CadenaX= new int [7];///Con la que corre la funcion
+            int[] CadenaY=new int [7];///Primer valor P
+            int[] CadenaZ=new int [7];///Segundo valor M
+            String BinarioString;   
+            int a,b,c,d,e,f,g;
+
+
+
+            public void action() {
+                ///Inicializar poblacion
+                if(solouna==0){
+                    for(int j=0;j<CadenaX.length;j++){///Dar valor aleatorio a X
+                            y=(int)(Math.random()*(2+0));///1 y 0
+                            CadenaX[j]=(int)y;
+                        }
+                    for(int j=0;j<CadenaY.length;j++){///Dar valor aleatorio a cadena Y
+                            y=(int)(Math.random()*(2+0));///1 y 0
+                            CadenaY[j]=(int)y; 
+                        }
+                    for(int j=0;j<CadenaZ.length;j++){///Dar valor aleatorio a cadena Y
+                            y=(int)(Math.random()*(2+0));///1 y 0
+                            CadenaZ[j]=(int)y; 
+                        }
+                    solouna=1;
+                }
+                ////-------------------------------------------------------------------------------------
+
+                    ///Asignar el binario a la cadena
+                    a=(int)CadenaX[0];
+                    b=(int)CadenaX[1];
+                    c=(int)CadenaX[2];
+                    d=(int)CadenaX[3];
+                    e=(int)CadenaX[4];
+                    f=(int)CadenaX[5];
+                    g=(int)CadenaX[6];
+
+                    BinarioString = String.valueOf(a);
+                    BinarioString =BinarioString +String.valueOf(b);
+                    BinarioString =BinarioString +String.valueOf(c);
+                    BinarioString =BinarioString +String.valueOf(d);
+                    BinarioString =BinarioString +String.valueOf(e);
+                    BinarioString =BinarioString +String.valueOf(f);
+                    BinarioString =BinarioString +String.valueOf(g);
+
+                    //String X = new String(CadenaX);///Meterlo en una cadena para leerlo en decimal
+
+                    ///Binario a decimal
+                    bin=Integer.parseInt(BinarioString,2);
+                    x=bin;
+                    grad=2*(Beta0-x);///en beta se tiene que hacer fusion o mutacion en cada iteracion al igual que beta1
+                    Beta0=Beta0-(alpha*grad);
+                    Beta1=(float)((Math.pow(Beta0-126,2))*Beta0);
+                    System.out.printf("Beta0 = %.3f, Beta1 = %.3f\n", Beta0, Beta1);
+                    if(Beta1<gg){
+                        gg=Beta1;
+                        gg0=Beta0;
+                        iteracion=i;
+
+                        ///hands 6 hacer mutacion que tienda a subir
+                    }
+                    for(int j=0;j<CadenaY.length;j=j+1){
+                        CadenaZ[j]=CadenaY[j];
+                    }///Asignar el valor de Y a Z
+                    for(int j=0;j<CadenaX.length;j=j+1){
+                        CadenaY[j]=CadenaX[j];
+                    }///Asignar el valor de X a Y
+                    if(ran1>=0){
+                        ran1=(int)(Math.random()*(4+0));
+                        ran2=(int)(Math.random()*(4+0));
+                    }
+
+                    if(ran1==0){
+                        CadenaX[0]=CadenaY[4];
+                        CadenaX[1]=CadenaY[3];
+                        CadenaX[2]=CadenaY[5];
+                    }
+                    if(ran1==1){
+                        CadenaX[0]=CadenaY[1];
+                        CadenaX[1]=CadenaY[0];
+                        CadenaX[2]=CadenaY[2];
+                    }
+                    if(ran1==2){
+                        CadenaX[0]=CadenaY[4];
+                        CadenaX[1]=CadenaY[0];
+                        CadenaX[2]=CadenaY[1];
+                    }
+                    if(ran1==3){
+                        CadenaX[0]=CadenaY[1];
+                        CadenaX[1]=CadenaY[3];
+                        CadenaX[2]=CadenaY[4];
+                    }
+
+
+                    if(ran2==0){
+                        CadenaX[3]=CadenaZ[4];
+                        CadenaX[4]=CadenaZ[3];
+                        CadenaX[5]=CadenaY[5];
+                    }
+                    if(ran2==1){
+                        CadenaX[3]=CadenaZ[1];
+                        CadenaX[4]=CadenaZ[0];
+                        CadenaX[5]=CadenaY[2];
+                    }
+                    if(ran2==2){
+                        CadenaX[3]=CadenaZ[4];
+                        CadenaX[4]=CadenaZ[0];
+                        CadenaX[5]=CadenaY[3];
+                    }
+                    if(ran2==3){
+                        CadenaX[3]=CadenaZ[1];
+                        CadenaX[4]=CadenaZ[3];
+                        CadenaX[5]=CadenaY[4];
+                    }
+
+
+                    CadenaX[6]=0;
+                    ran=(int)(Math.random()*(101+0));
+                    if(ran==100){
+                        CadenaX[6]=1;
+                        System.out.printf("MUTACION");
+                    }
+                    if(x==0){
+                        CadenaX[3]=1;
+                        System.out.printf("MUTACION");
+                    }
+
+
+                if (Beta1<=0.5){
+                    System.out.printf("Iteracion = "+iteracion+" Beta0 optima = %.3f, Beta1 optima = %.3f\n", gg0, gg);
+                }
+                i++;
+            }
+
+
+            public boolean done() {
+              if (Beta1<=0.5)
+                return true;
+              else
+                return false;
+            }
+
+            public int onEnd() {
+              myAgent.doDelete();
+              return super.onEnd();
+            }
+        }
+    }
+///
