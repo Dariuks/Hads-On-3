@@ -1,0 +1,369 @@
+///
+    /*
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
+     */
+    package jade;
+    import jade.core.Agent;
+    import jade.core.behaviours.Behaviour;
+
+
+    public class Agente6 extends Agent{
+       protected void setup() {
+        System.out.println("Agent "+getLocalName()+" started.");
+        addBehaviour(new MyGenericBehaviour());
+      } 
+
+      private class MyGenericBehaviour extends Behaviour {
+
+        int generacion=0,x,y,ran,ran1=0,ran2=0,bin;///X es el padre y Y es la madre, una vez se utiliza X pasa a ser Y
+        float auxcont;
+        //x=(int)(Math.random()*(32+0));//numero aleatorio 31-0
+        
+        int[] CadenaX= new int [7];///Con la que corre la funcion
+        int[] CadenaY=new int [7];///Primer valor P
+        int[] CadenaZ=new int [7];///Segundo valor M
+        String BinarioString;
+        int[] Cadena1= new int [7];
+        int[] Cadena2= new int [7];
+        int[] Cadena3= new int [7];
+        int[] Cadena4= new int [7];
+        int[] Cadena5= new int [7];
+        int[] Cadena6= new int [7];
+        int[] Cadena7= new int [7];
+        int a,b,c,d,e,f,g,cont=0,cont1=0,cont2=0,cont3=0,cont4=0,cont5=0,cont6=0,cont7=0,conttotal=0,conttotalFinal=0,solouna=0,soloUna=0;
+        
+
+            public void action() {
+                ///Inicializar poblacion
+                if(solouna==0){
+                    for(int j=0;j<CadenaX.length;j++){///Dar valor aleatorio a X
+                    y=(int)(Math.random()*(2+0));///1 y 0
+                    CadenaX[j]=(int)y;
+                    }
+                    for(int j=0;j<CadenaY.length;j++){///Dar valor aleatorio a cadena Y
+                            y=(int)(Math.random()*(2+0));///1 y 0
+                            CadenaY[j]=(int)y; 
+                    }
+                    for(int j=0;j<CadenaZ.length;j++){///Dar valor aleatorio a cadena Y
+                            y=(int)(Math.random()*(2+0));///1 y 0
+                            CadenaZ[j]=(int)y; 
+                    }
+                    solouna=1;
+                }
+                ////-------------------------------------------------------------------------------------
+
+                    ///Asignar el binario a la cadena
+                a=(int)CadenaX[0];
+                if(a>=1){
+                    cont=cont+1;
+                }
+                b=(int)CadenaX[1];
+                if(b>=1){
+                    cont=cont+1;
+                }
+                c=(int)CadenaX[2];
+                if(c>=1){
+                    cont=cont+1;
+                }
+                d=(int)CadenaX[3];
+                if(d>=1){
+                    cont=cont+1;
+                }
+                e=(int)CadenaX[4];
+                if(e>=1){
+                    cont=cont+1;
+                }
+                f=(int)CadenaX[5];
+                if(f>=1){
+                    cont=cont+1;
+                }
+                g=(int)CadenaX[6];
+                if(g>=1){
+                    cont=cont+1;
+                }
+                if(cont>cont1){
+                    cont7=cont6;
+                    cont6=cont5;
+                    cont5=cont4;
+                    cont4=cont3;
+                    cont3=cont2;
+                    cont2=cont1;
+                    cont1=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    for(int j=0;j<Cadena6.length;j=j+1){
+                    Cadena6[j]=Cadena5[j];
+                    }
+                    for(int j=0;j<Cadena5.length;j=j+1){
+                    Cadena5[j]=Cadena4[j];
+                    }
+                    for(int j=0;j<Cadena4.length;j=j+1){
+                    Cadena4[j]=Cadena3[j];
+                    }
+                    for(int j=0;j<Cadena3.length;j=j+1){
+                    Cadena3[j]=Cadena2[j];
+                    }
+                    for(int j=0;j<Cadena2.length;j=j+1){
+                    Cadena2[j]=Cadena1[j];
+                    }
+                    Cadena1[0]=a;
+                    Cadena1[1]=b;
+                    Cadena1[2]=c;
+                    Cadena1[3]=d;
+                    Cadena1[4]=e;
+                    Cadena1[5]=f;
+                    Cadena1[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont2){
+                    cont7=cont6;
+                    cont6=cont5;
+                    cont5=cont4;
+                    cont4=cont3;
+                    cont3=cont2;
+                    cont2=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    for(int j=0;j<Cadena6.length;j=j+1){
+                    Cadena6[j]=Cadena5[j];
+                    }
+                    for(int j=0;j<Cadena5.length;j=j+1){
+                    Cadena5[j]=Cadena4[j];
+                    }
+                    for(int j=0;j<Cadena4.length;j=j+1){
+                    Cadena4[j]=Cadena3[j];
+                    }
+                    for(int j=0;j<Cadena3.length;j=j+1){
+                    Cadena3[j]=Cadena2[j];
+                    }
+                    Cadena2[0]=a;
+                    Cadena2[1]=b;
+                    Cadena2[2]=c;
+                    Cadena2[3]=d;
+                    Cadena2[4]=e;
+                    Cadena2[5]=f;
+                    Cadena2[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont3){
+                    cont7=cont6;
+                    cont6=cont5;
+                    cont5=cont4;
+                    cont4=cont3;
+                    cont3=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    for(int j=0;j<Cadena6.length;j=j+1){
+                    Cadena6[j]=Cadena5[j];
+                    }
+                    for(int j=0;j<Cadena5.length;j=j+1){
+                    Cadena5[j]=Cadena4[j];
+                    }
+                    for(int j=0;j<Cadena4.length;j=j+1){
+                    Cadena4[j]=Cadena3[j];
+                    }
+                    Cadena3[0]=a;
+                    Cadena3[1]=b;
+                    Cadena3[2]=c;
+                    Cadena3[3]=d;
+                    Cadena3[4]=e;
+                    Cadena3[5]=f;
+                    Cadena3[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont4){
+                    cont7=cont6;
+                    cont6=cont5;
+                    cont5=cont4;
+                    cont4=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    for(int j=0;j<Cadena6.length;j=j+1){
+                    Cadena6[j]=Cadena5[j];
+                    }
+                    for(int j=0;j<Cadena5.length;j=j+1){
+                    Cadena5[j]=Cadena4[j];
+                    }
+                    Cadena4[0]=a;
+                    Cadena4[1]=b;
+                    Cadena4[2]=c;
+                    Cadena4[3]=d;
+                    Cadena4[4]=e;
+                    Cadena4[5]=f;
+                    Cadena4[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont5){
+                    cont7=cont6;
+                    cont6=cont5;
+                    cont5=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    for(int j=0;j<Cadena6.length;j=j+1){
+                    Cadena6[j]=Cadena5[j];
+                    }
+                    Cadena5[0]=a;
+                    Cadena5[1]=b;
+                    Cadena5[2]=c;
+                    Cadena5[3]=d;
+                    Cadena5[4]=e;
+                    Cadena5[5]=f;
+                    Cadena5[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont6){
+                    cont7=cont6;
+                    cont6=cont;
+                    for(int j=0;j<Cadena7.length;j=j+1){
+                    Cadena7[j]=Cadena6[j];
+                    }
+                    Cadena6[0]=a;
+                    Cadena6[1]=b;
+                    Cadena6[2]=c;
+                    Cadena6[3]=d;
+                    Cadena6[4]=e;
+                    Cadena6[5]=f;
+                    Cadena6[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+                if(cont>cont7){ 
+                    cont7=cont;
+                    Cadena7[0]=a;
+                    Cadena7[1]=b;
+                    Cadena7[2]=c;
+                    Cadena7[3]=d;
+                    Cadena7[4]=e;
+                    Cadena7[5]=f;
+                    Cadena7[6]=g;
+                    cont=0;
+                    conttotalFinal=cont1+cont2+cont3+cont4+cont5+cont6+cont7;
+                }
+
+
+
+
+                if(soloUna==0 && cont7>=1){
+                    conttotal=conttotalFinal;
+                    soloUna=1;
+                }
+
+                cont=0;
+                BinarioString = String.valueOf(a);
+                BinarioString =BinarioString +String.valueOf(b);
+                BinarioString =BinarioString +String.valueOf(c);
+                BinarioString =BinarioString +String.valueOf(d);
+                BinarioString =BinarioString +String.valueOf(e);
+                BinarioString =BinarioString +String.valueOf(f);
+                BinarioString =BinarioString +String.valueOf(g);
+
+                //String X = new String(CadenaX);///Meterlo en una cadena para leerlo en decimal
+
+                ///Binario a decimal
+                bin=Integer.parseInt(BinarioString,2);
+                x=bin;
+
+
+                for(int j=0;j<CadenaY.length;j=j+1){
+                    CadenaZ[j]=CadenaY[j];
+                }///Asignar el valor de Y a Z
+                for(int j=0;j<CadenaX.length;j=j+1){
+                    CadenaY[j]=CadenaX[j];
+                }///Asignar el valor de X a Y
+                if(ran1>=0){
+                    ran1=(int)(Math.random()*(4+0));
+                    ran2=(int)(Math.random()*(4+0));
+                }
+                ///PADRE
+                if(ran1==0){
+                    CadenaX[0]=CadenaY[4];
+                    CadenaX[1]=CadenaY[3];
+                    CadenaX[2]=CadenaY[5];
+                }
+                if(ran1==1){
+                    CadenaX[0]=CadenaY[1];
+                    CadenaX[1]=CadenaY[0];
+                    CadenaX[2]=CadenaY[2];
+                }
+                if(ran1==2){
+                    CadenaX[0]=CadenaY[4];
+                    CadenaX[1]=CadenaY[0];
+                    CadenaX[2]=CadenaY[1];
+                }
+                if(ran1==3){
+                    CadenaX[0]=CadenaY[1];
+                    CadenaX[1]=CadenaY[3];
+                    CadenaX[2]=CadenaY[4];
+                }
+
+                ///MADRE           
+                if(ran2==0){
+                    CadenaX[3]=CadenaZ[4];
+                    CadenaX[4]=CadenaZ[3];
+                    CadenaX[5]=CadenaZ[5];
+                }
+                if(ran2==1){
+                    CadenaX[3]=CadenaZ[1];
+                    CadenaX[4]=CadenaZ[0];
+                    CadenaX[5]=CadenaZ[2];
+                }
+                if(ran2==2){
+                    CadenaX[3]=CadenaZ[4];
+                    CadenaX[4]=CadenaZ[0];
+                    CadenaX[5]=CadenaZ[3];
+                }
+                if(ran2==3){
+                    CadenaX[3]=CadenaZ[1];
+                    CadenaX[4]=CadenaZ[3];
+                    CadenaX[5]=CadenaZ[4];
+                }
+
+
+                CadenaX[6]=0;
+                ran=(int)(Math.random()*(780+0));
+                if(ran==100){
+                    CadenaX[6]=1;
+                    System.out.printf("MUTACION");
+                }
+                if(x==0){
+                    CadenaX[3]=1;
+                    System.out.printf("MUTACION");
+                }
+                generacion++;
+    
+            if (generacion==300){
+                auxcont=((conttotalFinal*100)/conttotal)-100;    
+                System.out.printf("Primera Generacion:"+conttotal);
+                System.out.printf("Ultima Generacion:"+conttotalFinal);
+                System.out.printf("Mejoria del:"+auxcont+"porciento");
+            }
+            
+            }
+
+
+        public boolean done() {
+          if (generacion==300)
+            return true;
+          else
+            return false;
+        }
+
+        public int onEnd() {
+          myAgent.doDelete();
+          return super.onEnd();
+        }
+        }
+    }
+///
